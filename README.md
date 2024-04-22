@@ -3,7 +3,7 @@
     <img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" />
   </a>
   <a href="https://flutter.dev/" target="blank">
-    <img src="https://storage.googleapis.com/cms-storage-bucket/4965e035e6c2c5b09dd2.svg" width="200" alt="Flutter Logo" />
+    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2Fflutter&psig=AOvVaw3p1N8RY11Ss_MhGlJVNsyk&ust=1713850903047000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMjWouSN1YUDFQAAAAAdAAAAABAE" width="200" alt="Flutter Logo" />
   </a>
 </div>
 
