@@ -81,7 +81,7 @@ export class MongoUserService{
       if (user==null) {
         throw new NotFoundException("no user exist")
       }
- console.log(user);
+
  
     return user;
     } catch (error) {

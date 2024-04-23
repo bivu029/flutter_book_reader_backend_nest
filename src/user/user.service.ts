@@ -5,12 +5,13 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { MongoUserService } from './database/usermongo.service';
 // import { User } from './schema/user.entity';
 import { User } from './interface/user.interface';
+import { AuthService } from 'src/auth/auth.service';
 
 
 
 @Injectable()
 export class UserService {
-  constructor(private mongoservice: MongoUserService) { }
+  constructor(private mongoservice: MongoUserService, private authservice:AuthService) { }
 
   ////create user//// 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -18,6 +19,7 @@ export class UserService {
     const { email } = createUserDto;
     const existingUser = await this.mongoservice.findOneUser(email);
     if (existingUser) {
+      const jwtToken = await this.authservice.generateToken({ userId: existingUser._id ,role:existingUser.role});
     const userexist: User = {
         idToken: existingUser._id,
 
@@ -30,12 +32,13 @@ export class UserService {
         favoriteBooks: existingUser.favoriteBooks,
         readHistory: existingUser.readHistory,
         uplaodedbooks: existingUser.uploadedbooks,
-        jwtToken: "jwt",
+        jwtToken: jwtToken,
 
       };
       return userexist;
     }
     const user =await  this.mongoservice.creteUser(createUserDto);
+    const jwtToken = await this.authservice.generateToken({ userId: user._id,role:user.role });
     const newuser: User = {
       idToken: user.id,
 
@@ -48,7 +51,7 @@ export class UserService {
       favoriteBooks: user.favoriteBooks,
       readHistory: user.readHistory,
       uplaodedbooks: user.uploadedBooks,
-      jwtToken: "",
+      jwtToken: jwtToken,
 
     };
     return newuser;
