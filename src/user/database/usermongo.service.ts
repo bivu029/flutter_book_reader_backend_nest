@@ -36,7 +36,7 @@ export class MongoUserService{
    async findOneUser(email:string):Promise<any>{
    
     const result= await this.usermodel.findOne({email}).exec();
-   
+ 
     return result;
    };  
 
@@ -44,6 +44,7 @@ export class MongoUserService{
     //create user //
     async creteUser(MongoCreateUserDto:CreateUserDto):Promise<UserDocument>{
         const data= await this.usermodel.create(MongoCreateUserDto);
+     
         return data;
        }
 
@@ -66,6 +67,7 @@ export class MongoUserService{
 
    async findone(id:string):Promise<UserDocument>{
     const user= await this.usermodel.findById(id);
+    console.log(user);
     return user;
    }
 

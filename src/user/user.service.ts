@@ -11,8 +11,9 @@ import { User } from './interface/user.interface';
 export class UserService {
   constructor(private mongoservice: MongoUserService) { }
 
-  ////create user////
+  ////create user//// 
   async create(createUserDto: CreateUserDto): Promise<User> {
+
     const { email } = createUserDto;
     const existingUser = await this.mongoservice.findOneUser(email);
     if (existingUser) {
@@ -27,7 +28,7 @@ export class UserService {
         bookProgress: existingUser.bookProgress,
         favoriteBooks: existingUser.favoriteBooks,
         readHistory: existingUser.readHistory,
-        uplaodedbooks: existingUser.uplaodedbooks,
+        uplaodedbooks: existingUser.uploadedbooks,
         jwtToken: "jwt",
 
       };
@@ -45,7 +46,7 @@ export class UserService {
       bookProgress: user.bookProgress,
       favoriteBooks: user.favoriteBooks,
       readHistory: user.readHistory,
-      uplaodedbooks: user.uplaodedbooks,
+      uplaodedbooks: user.uploadedBooks,
       jwtToken: "",
 
     };

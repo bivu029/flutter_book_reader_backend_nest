@@ -106,7 +106,7 @@ export class User {
   @Prop({ default: [Role.USER] })
   role: Role[];
 
-  @Prop({ type:[SubscriptionSchema],isRequired:false })
+  @Prop({ type:SubscriptionSchema,isRequired:false ,default:null})
   subscription?: Subscription;
 
   @Prop({ type: [BookProgressSchema],default:[] })
@@ -119,7 +119,7 @@ export class User {
   favoriteBooks: FavouriteBooks[];
 
   @Prop({ type: [UploadedBooksSchema],default:[] })
-  uplaodedbooks: UploadedBooks[];
+  uploadedBooks: UploadedBooks[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

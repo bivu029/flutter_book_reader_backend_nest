@@ -1,5 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString, IsArray, IsDate,  ValidateNested, IsNumber,  } from "class-validator";
-
+import { Transform, Type } from "class-transformer";
+import { IsEmail, IsNotEmpty, IsString,  IsDate, ValidateNested, IsNumber, IsOptional,  } from "class-validator";
 
 
 // class Subscription {
@@ -25,9 +25,10 @@ export class FavouriteBooks {
     @IsNotEmpty()
     bookId: string;
 
-    @IsString()
+    @IsDate()
     @IsNotEmpty()
-    addedAt: string;
+    @Transform(({ value }) => new Date(value))
+    addedAt: Date;
 }
 
 export class UploadedBooks {
@@ -37,6 +38,7 @@ export class UploadedBooks {
 
     @IsDate()
     @IsNotEmpty()
+    @Transform(({ value }) => new Date(value))
     uploadedAt: Date;
 }
 
@@ -47,6 +49,7 @@ export class ReadHistory {
 
     @IsDate()
     @IsNotEmpty()
+    @Transform(({ value }) => new Date(value))
     readAt: Date;
 }
 
@@ -65,9 +68,9 @@ export class BookProgress {
 
     @IsDate()
     @IsNotEmpty()
+    @Transform(({ value }) => new Date(value))
     lastReadTimestamp: Date;
 }
-
 export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
@@ -84,23 +87,24 @@ export class CreateUserDto {
     @IsString()
     photoUrl?: string;
 
-    // @ValidateNested()
-    // @IsOptional()
-    // subscription?: Subscription;
-
-    @IsArray()
+    @IsOptional()
+   
     @ValidateNested({ each: true })
+    @Type(()=>BookProgress)
     bookProgress: BookProgress[];
 
-    @IsArray()
+    @IsOptional()
+    @Type(()=>ReadHistory)
     @ValidateNested({ each: true })
     readHistory: ReadHistory[];
 
-    @IsArray()
+    @IsOptional()
+    @Type(()=>FavouriteBooks)
     @ValidateNested({ each: true })
     favoriteBooks: FavouriteBooks[];
 
-    @IsArray()
+    @IsOptional()
+    @Type(()=>UploadedBooks)
     @ValidateNested({ each: true })
-    uplaodedbooks: UploadedBooks[];
+    uploadedBooks: UploadedBooks[];
 }
