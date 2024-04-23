@@ -124,7 +124,7 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
-
+//exclude _id parameter from database  response and it has been implemented  mongoservice in  class
 export const bookProgressSerializer = (doc: BookProgressDocument, retVal: Record<string, any>): void => {
   delete retVal._id;
 };

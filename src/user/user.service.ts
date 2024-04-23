@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 import { MongoUserService } from './database/usermongo.service';
 // import { User } from './schema/user.entity';
 import { User } from './interface/user.interface';
+
 
 
 @Injectable()
@@ -65,7 +66,13 @@ export class UserService {
     return  await this.mongoservice.updateUser(id,updateUserDto);
   }
 
- async remove(id: string):Promise<any> {
-    return await this.mongoservice.deleteOne(id);
+  // this transfrom method transform return value to following format
+  
+  async remove(id: string): Promise<object> {
+    const deleted = await this.mongoservice.deleteOne(id);
+    // if (!deleted) {
+    //   throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    // }
+    return {"deleted":deleted};
   }
 }

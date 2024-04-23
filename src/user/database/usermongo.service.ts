@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { BookConstant } from "src/core/constants/const";
@@ -51,30 +51,68 @@ export class MongoUserService{
           //update user//
        
   async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<UserDocument | null> {
+  try {
     const updatedUser = await this.usermodel
-      .findOneAndUpdate({ _id: userId }, { $set: updateUserDto }, { new: true })
-      .exec();
+    .findOneAndUpdate({ _id: userId }, { $set: updateUserDto }, { new: true })
+    .exec();
 
-    if (!updatedUser) {
-      throw new NotFoundException(`User with ID ${userId} not found`);
+  if (!updatedUser) {
+    throw new NotFoundException(`User with ID ${userId} not found`);
+  }
+
+  return updatedUser;
+  } catch (error) {
+    if (error.name === 'CastError') {
+      throw new HttpException('Invalid user input, please check input data', HttpStatus.BAD_REQUEST);
+    } else if (error.name === 'NotFoundException') {
+      throw new HttpException('No user Found', HttpStatus.NOT_FOUND);
+    } else {
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    return updatedUser;
+  }
   }
 
 
    ///find one by id
 
    async findone(id:string):Promise<UserDocument>{
-    const user= await this.usermodel.findById(id);
-    console.log(user);
+    try {
+      const user= await this.usermodel.findById(id);
+      if (user==null) {
+        throw new NotFoundException("no user exist")
+      }
+ console.log(user);
+ 
     return user;
+    } catch (error) {
+      if (error.name === 'CastError') {
+        throw new HttpException('Invalid user input, please check input data', HttpStatus.BAD_REQUEST);
+      } else if (error.name === 'NotFoundException') {
+        throw new HttpException('No user Found', HttpStatus.NOT_FOUND);
+      } else {
+        throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
    }
 
    //delete user
-   async deleteOne(id: string): Promise<UserDocument> {
+   async deleteOne(id: string): Promise<boolean> {
+  try {
     const deletedUser = await this.usermodel.findByIdAndDelete(id).exec();
-    return deletedUser;
+    if (!deletedUser) {
+      throw new NotFoundException('User not found');
+    }
+    return !!deletedUser;
+  } catch (error) {
+    console.log(error.name);
+    if (error.name === 'CastError') {
+      throw new HttpException('Invalid user input, please check input data', HttpStatus.BAD_REQUEST);
+    } else if (error.name === 'NotFoundException') {
+      throw new HttpException('No user Found', HttpStatus.NOT_FOUND);
+    } else {
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
   }
   //find all user//
   async findAllUsers(): Promise<UserDocument[]> {
