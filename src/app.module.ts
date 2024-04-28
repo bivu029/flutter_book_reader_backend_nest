@@ -8,6 +8,8 @@ import { ConfigsModule } from './config/config.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './core/common/gurd/roles.gurd';
+import { BookModule } from './book/book.module';
+import { CacheModule } from '@nestjs/cache-manager';
 @Module({
   imports: [UserModule,
    ConfigsModule,
@@ -17,6 +19,8 @@ import { RolesGuard } from './core/common/gurd/roles.gurd';
       inject:[ConfigService]
     }),
     AuthModule,
+    BookModule,
+    CacheModule.register({ isGlobal: true,ttl:36000*5})
 
   ],
   controllers: [AppController],

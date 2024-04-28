@@ -5,6 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
+import { GoogleAuthService } from './googleauth.service';
+import { GoogleAuthGuard } from './googleauth.gurd';
 @Module({
   imports:[
     ConfigsModule, //for getting .local.env file 
@@ -13,12 +15,12 @@ import { JwtStrategy } from './jwt.strategy';
       imports:[ ConfigsModule],
       useFactory: async (configService: ConfigService) => ({ 
         secret: configService.get<string>('JWT_SECRET_KEY'), //this is key from .local.env 
-        signOptions: { expiresIn: '1d' },
+        signOptions: { expiresIn: '30d' },
       }),
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService,JwtStrategy],
-  exports:[AuthService]
+  providers: [AuthService,JwtStrategy,GoogleAuthService,GoogleAuthGuard],
+  exports:[AuthService,GoogleAuthService,GoogleAuthGuard]
 })
 export class AuthModule {}

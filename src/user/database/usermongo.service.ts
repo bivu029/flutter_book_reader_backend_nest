@@ -119,4 +119,29 @@ export class MongoUserService{
     const users = await this.usermodel.find().exec();
     return users;
   }
+
+  async isblocUser(id :string, blocstatus: boolean):Promise<UserDocument | null>{
+    try {
+      const updatedUser = await this.usermodel
+      .findOneAndUpdate({ _id: id }, {$set: { isbloc:blocstatus }}, )
+      .exec();
+  
+    if (!updatedUser) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+  
+    return updatedUser;
+    } catch (error) {
+      if (error.name === 'CastError') {
+        throw new HttpException('Invalid user input, please check input data', HttpStatus.BAD_REQUEST);
+      } else if (error.name === 'NotFoundException') {
+        throw new HttpException('No user Found', HttpStatus.NOT_FOUND);
+      } else {
+        throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+
+  }
+
+ 
 }

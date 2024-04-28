@@ -78,4 +78,12 @@ export class UserService {
     // }
     return {"deleted":deleted};
   }
+
+ async isblocUser(id :string, blocstatus: boolean):Promise<object>{
+
+  return await this.mongoservice.isblocUser(id,blocstatus);
+  }
+
+
+
 }
