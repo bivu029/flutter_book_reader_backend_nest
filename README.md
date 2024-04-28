@@ -36,46 +36,47 @@ The Flutter Book Reader Backend is a scalable and efficient server-side applicat
 ## Project Structure
 
 bookreader-app/
-
-
-<div class="tree">
-  <div><span class="module">bookreader-app/</span></div>
-  <div><span class="file">├── src/</span></div>
-  <div><span class="file">│   ├── app.module.ts</span></div>
-  <div><span class="file">│   ├── main.ts</span></div>
-  <div><span class="file">│   ├── auth/</span></div>
-  <div><span class="file">│   │   ├── auth.module.ts</span></div>
-  <div><span class="file">│   │   ├── jwt.strategy.ts</span></div>
-  <div><span class="file">│   │   ├── jwt.guard.ts</span></div>
-  <div><span class="file">│   │   ├── google-auth.guard.ts</span></div>
-  <div><span class="file">│   │   ├── constants.ts</span></div>
-  <div><span class="file">│   ├── user/</span></div>
-  <div><span class="file">│   │   ├── user.module.ts</span></div>
-  <div><span class="file">│   │   ├── user.service.ts</span></div>
-  <div><span class="file">│   │   ├── user.controller.ts</span></div>
-  <div><span class="file">│   │   ├── user.entity.ts</span></div>
-  <div><span class="file">│   ├── book/</span></div>
-  <div><span class="file">│   │   ├── book.module.ts</span></div>
-  <div><span class="file">│   │   ├── book.service.ts</span></div>
-  <div><span class="file">│   │   ├── book.controller.ts</span></div>
-  <div><span class="file">│   │   ├── book.entity.ts</span></div>
-  <div><span class="file">│   │   ├── dto</span></div>
-  <div><span class="file">│   │   │    ├── createbook.dto.ts</span></div>
-  <div><span class="file">│   │   │    ├── updatebook.dto.ts</span></div>
-  <div><span class="file">│   │   ├── database</span></div>
-  <div><span class="file">│   │   └── schema</span></div>
-  <div><span class="file">│   └── core/</span></div>
-  <div><span class="file">│        ├── common</span></div>
-  <div><span class="file">│                 ├── decorator</span></div>
-  <div><span class="file">│                 ├── exception</span></div>
-  <div><span class="file">│                 ├── guard</span></div>
-  <div><span class="file">├── test/</span></div>
-  <div><span class="file">│   ├── app.e2e-spec.ts</span></div>
-  <div><span class="file">├── package.json</span></div>
-  <div><span class="file">├── tsconfig.json</span></div>
-  <div><span class="file">├── tsconfig.build.json</span></div>
-  <div><span class="file">├── nest-cli.json</span></div>
-</div>
+```bash
+bookreader-app/
+├── src/
+│   ├── app.module.ts
+│   ├── main.ts
+│   ├── auth/
+│   │   ├── auth.module.ts
+│   │   ├── jwt.strategy.ts
+│   │   ├── jwt.guard.ts
+│   │   ├── google-auth.guard.ts
+│   │   ├── constants.ts
+│   │   └── ...
+│   ├── user/
+│   │   ├── user.module.ts
+│   │   ├── user.service.ts
+│   │   ├── user.controller.ts
+│   │   ├── user.entity.ts
+│   │   └── ...
+│   ├── book/
+│   │   ├── book.module.ts
+│   │   ├── book.service.ts
+│   │   ├── book.controller.ts
+│   │   ├── book.entity.ts
+│   │   ├── dto/
+│   │   │    ├── createbook.dto.ts
+│   │   │    ├── updatebook.dto.ts
+│   │   ├── database/
+│   │   └── schema/
+│   └── core/
+│        ├── common/
+│                 ├── decorator/
+│                 ├── exception/
+│                 ├── guard/
+├── test/
+│   ├── app.e2e-spec.ts
+│   └── ...
+├── package.json
+├── tsconfig.json
+├── tsconfig.build.json
+├── nest-cli.json
+└── ...
 
 ## Installation
 
