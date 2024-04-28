@@ -34,7 +34,7 @@ The Flutter Book Reader Backend is a scalable and efficient server-side applicat
 - 🌐 RESTful API endpoints
 
 ## Project Structure
-<div align="center">
+
 bookreader-app/
 <style>
 .tree {
@@ -115,7 +115,7 @@ bookreader-app/
   <div><span class="file">├── tsconfig.build.json</span></div>
   <div><span class="file">├── nest-cli.json</span></div>
 </div>
-</div>
+
 ## Installation
 
 ```bash
