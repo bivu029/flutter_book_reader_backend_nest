@@ -36,46 +36,7 @@ The Flutter Book Reader Backend is a scalable and efficient server-side applicat
 ## Project Structure
 
 bookreader-app/
-<style>
-.tree {
-  font-family: monospace;
-  color: #333;
-  line-height: 1.5;
-}
-.tree div {
-  position: relative;
-}
-.tree div::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -1.5em;
-  border-left: 2px solid #d0d0d0;
-}
-.tree div::after {
-  content: '';
-  position: absolute;
-  top: 0.75em;
-  left: -1.5em;
-  width: 1.5em;
-  height: 0.5em;
-  border-bottom: 2px solid #d0d0d0;
-  border-left: 2px solid #d0d0d0;
-}
-.tree div:last-child::before {
-  height: 0.75em;
-}
-.tree div:last-child::after {
-  border-left: none;
-}
-.tree .module {
-  color: #d2691e;
-}
-.tree .file {
-  color: #1e90ff;
-}
-</style>
+
 
 <div class="tree">
   <div><span class="module">bookreader-app/</span></div>
