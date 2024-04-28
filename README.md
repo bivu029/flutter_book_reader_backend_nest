@@ -33,6 +33,47 @@ The Flutter Book Reader Backend is a scalable and efficient server-side applicat
 - 🗄️ Integration with MongoDB database
 - 🌐 RESTful API endpoints
 
+## Project Structure
+bookreader-app/
+├── src/
+│   ├── app.module.ts
+│   ├── main.ts
+│   ├── auth/
+│   │   ├── auth.module.ts
+│   │   ├── jwt.strategy.ts
+│   │   ├── jwt.guard.ts
+│   │   ├── google-auth.guard.ts
+│   │   ├── constants.ts
+│   │   └── ...
+│   ├── user/
+│   │   ├── user.module.ts
+│   │   ├── user.service.ts
+│   │   ├── user.controller.ts
+│   │   ├── user.entity.ts
+│   │   └── ...
+│   ├── book/
+│   │   ├── book.module.ts
+│   │   ├── book.service.ts
+│   │   ├── book.controller.ts
+│   │   ├── book.entity.ts
+│   │   ├── dto
+│   │   │    ├──createbook.dto.ts
+│   │   │     ├──updatebook.dto.ts
+│   │   ├── database
+│   │   └── schema
+│   └── core/
+│        ├── common 
+│                 ├── decorator
+│                 ├── exception
+│                 ├── gurd
+├── test/
+│   ├── app.e2e-spec.ts
+│   └── ...
+├── package.json
+├── tsconfig.json
+├── tsconfig.build.json
+├── nest-cli.json
+└── ...
 ## Installation
 
 ```bash
