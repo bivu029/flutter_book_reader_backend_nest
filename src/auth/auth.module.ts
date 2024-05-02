@@ -9,12 +9,12 @@ import { GoogleAuthService } from './googleauth.service';
 import { GoogleAuthGuard } from './googleauth.gurd';
 @Module({
   imports:[
-    ConfigsModule, //for getting .local.env file 
+    ConfigsModule, //for getting .env file 
     PassportModule,
     JwtModule.registerAsync({
       imports:[ ConfigsModule],
       useFactory: async (configService: ConfigService) => ({ 
-        secret: configService.get<string>('JWT_SECRET_KEY'), //this is key from .local.env 
+        secret: configService.get<string>('JWT_SECRET_KEY'), //this is key from .env 
         signOptions: { expiresIn: '30d' },
       }),
       inject: [ConfigService],

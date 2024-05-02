@@ -69,8 +69,10 @@ type ChapterListDocument = HydratedDocument<ChapterList>;
 @Schema()
 class ChapterList {
     @Prop({ required: true })
+  
     id: string;
-
+    @Prop()
+    bookId:string;
     @Prop({ type: [ChapterSchema], default: [] })
     chapter: Chapter[]
 
@@ -100,7 +102,7 @@ export class Book  {
     genres: Genre[];
     @Prop({ type: [SubGenreSchema], default: [], })
     subGenres: SubGenre[];
-    @Prop({ type: [ChapterListSchema], default: [], })
+    @Prop({ type: ChapterListSchema, })
     chapterList: ChapterList;
 
     @Prop({ required: false, default: 0 })
