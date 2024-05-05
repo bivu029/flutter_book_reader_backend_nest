@@ -1,4 +1,4 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { BookDataBaseService } from './database/book.database';
@@ -133,6 +133,30 @@ async saveBookImage(file: Express.Multer.File, userId: string, bookId: string): 
     // Handle errors (e.g., log them, throw them, etc.)
     console.error('Error saving the book image:', error);
     throw  new ImageSavedException(); // Rethrow the error to be handled by the caller
+  }
+}
+// In BookService
+
+async getAllBookImages(): Promise<any> {
+  const baseUploadDir = `./uploads/image`;
+  try {
+    const userDirs = await fsExtra.readdir(baseUploadDir);
+    let allImageUrls = [];
+
+    for (const userDir of userDirs) {
+      const userUploadDir = path.join(baseUploadDir, userDir, 'bookimage');
+      if (fsExtra.existsSync(userUploadDir)) {
+        const files = await fsExtra.readdir(userUploadDir);
+        const imageUrls = files.map(file => `http://localhost:3000/uploads/image/${userDir}/bookimage/${file}`);
+        allImageUrls = allImageUrls.concat(imageUrls);
+      }
+    }
+console.log('hjkh');
+
+    return {"allimage":allImageUrls};
+  } catch (error) {
+    console.error('Error retrieving book images:', error);
+    throw new NotFoundException('Images not found');
   }
 }
 }

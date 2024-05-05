@@ -14,7 +14,10 @@ import { Role } from 'src/core/enum/role/role.enum';
 export class BookController {
   constructor(private readonly bookService: BookService) { }
 
- 
+  @Get('images')
+  async getAllBookImages() {
+    return this.bookService.getAllBookImages();
+  }
   @Post(':userId/:bookId/upload')
   @UseInterceptors(FileInterceptor('file',multerconfig,))
   async uploadBookImage(
@@ -83,5 +86,6 @@ export class BookController {
   remove(@Param('id') id: string) {
     return this.bookService.remove(id);
   }
+
 
 }

@@ -4,6 +4,7 @@ import {  ValidationPipe, VersioningType } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 
+
 async function bootstrap() {
   const server = express();
   server.use('/uploads', express.static('uploads')); // Serve static files from 'uploads
@@ -21,6 +22,7 @@ app.enableVersioning({
       transform: true, // Enable the transform option
     }),
   );
+ 
 
   app.enableCors();
   await app.listen(3000, () => {

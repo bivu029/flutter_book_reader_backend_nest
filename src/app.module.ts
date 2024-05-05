@@ -10,6 +10,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './core/common/gurd/roles.gurd';
 import { BookModule } from './book/book.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { AnalysisModule } from './analysis/analysis.module';
 @Module({
   imports: [UserModule,
    ConfigsModule,
@@ -20,7 +21,8 @@ import { CacheModule } from '@nestjs/cache-manager';
     }),
     AuthModule,
     BookModule,
-    CacheModule.register({ isGlobal: true,ttl:36000*5})
+    CacheModule.register({ isGlobal: true,ttl:36000*5}),
+    AnalysisModule
 
   ],
   controllers: [AppController],

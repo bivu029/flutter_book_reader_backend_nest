@@ -22,5 +22,6 @@ import { AuthModule } from 'src/auth/auth.module';
   ],
   controllers: [UserController],
   providers: [UserService, MongoUserService],
+  exports:[MongoUserService]
 })
 export class UserModule { }

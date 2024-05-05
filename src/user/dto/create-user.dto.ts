@@ -1,5 +1,5 @@
 import { Transform, Type } from "class-transformer";
-import { IsEmail, IsNotEmpty, IsString,  IsDate, ValidateNested, IsNumber, IsOptional,  } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString,  IsDate, ValidateNested, IsNumber, IsOptional, IsArray,  } from "class-validator";
 
 
 // class Subscription {
@@ -61,6 +61,10 @@ export class BookProgress {
     @IsNumber()
     @IsNotEmpty()
     currentChapter: number;
+
+    @Type(() => Number)
+    @IsArray()
+    completChapterList:number[]
 
     @IsNumber()
     @IsNotEmpty()

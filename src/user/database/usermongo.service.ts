@@ -142,6 +142,11 @@ export class MongoUserService{
     }
 
   }
-
+  async updateCompletedChapterList(): Promise<void> {
+    await this.usermodel.updateMany(
+      { 'bookProgress.completChapterList': { $exists: false } },
+      { $set: { 'bookProgress.$[].completChapterList': [] } },
+    );
+  }
  
 }

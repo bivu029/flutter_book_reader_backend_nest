@@ -13,6 +13,8 @@ type BookProgressDocument = HydratedDocument<BookProgress>;
 
   @Prop({ required: true })
   currentChapter: number;
+  @Prop({ required: true ,default:[]})
+  completChapterList: number[];
 
   @Prop({ required: true })
   totalChapters: number;

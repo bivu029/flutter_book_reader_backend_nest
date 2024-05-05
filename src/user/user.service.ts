@@ -66,6 +66,8 @@ export class UserService {
   }
 
  async update(id:string, updateUserDto: UpdateUserDto):Promise<any> {
+  console.log(updateUserDto.bookProgress[0]);
+  
     return  await this.mongoservice.updateUser(id,updateUserDto);
   }
 
