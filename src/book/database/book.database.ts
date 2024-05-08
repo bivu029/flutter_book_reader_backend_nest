@@ -88,6 +88,18 @@ export class BookDataBaseService {
       return await this.bookmodel.findOne({title:title});
     }
 
+    /////find list of book  from list of id
+    async getbookbyListId(bookId:string[],page:number=1,limit:number=10):Promise<Book[]>{
+    try {
+      const skip = (page - 1) * limit;
+   
+      const books = await this.bookmodel.find({ id: { $in: bookId } }).skip(skip).limit(limit).exec();
+    
+      return books;
+    } catch (error) {
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    }
 
     //update book 
    async update(id: string, updateBookDto: UpdateBookDto) :Promise<BookDocument> {

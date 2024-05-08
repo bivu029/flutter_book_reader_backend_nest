@@ -8,12 +8,28 @@ import { multerconfig } from 'src/config/multer.configs';
 import { JwtAuthGuard } from 'src/auth/jwt.gurd';
 import { Roles } from 'src/core/common/decorators/role.decorator';
 import { Role } from 'src/core/enum/role/role.enum';
+import { GetBookListDto } from './dto/getList.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller({path:'book',version:"1"})
 export class BookController {
   constructor(private readonly bookService: BookService) { }
 
+
+
+
+  @Post('getBooks')
+async getBooks(
+  @Body() getBooksDto: GetBookListDto,
+  @Query('page') page: number = 1,
+  @Query('limit') limit: number = 10,
+){
+  console.log('GETBOOKCALLED');
+  
+  const {  bookidList } = getBooksDto;
+  const booklist = await this.bookService.finadBookfromList(bookidList, page, limit);
+  return  booklist;
+}
   @Get('images')
   async getAllBookImages() {
     return this.bookService.getAllBookImages();

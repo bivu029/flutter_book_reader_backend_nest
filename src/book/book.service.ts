@@ -9,6 +9,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { Readable } from 'stream';
 import { ImageSavedException } from 'src/core/common/exception/exception';
+import { Book } from './schema/book.schema';
 @Injectable()
 export class BookService {
   constructor(private bookdataservice:BookDataBaseService,
@@ -42,6 +43,9 @@ export class BookService {
     limit?: number ):Promise<any> {
     return await this.bookdataservice.findAll(searchQuery,page,limit);
   }
+    async finadBookfromList(bookId: string[], page: number = 1, limit: number = 10):Promise<Book[]>{
+      return await this.bookdataservice.getbookbyListId(bookId,page,limit);
+    }
 
   async findOne(id: string) :Promise<any>{
     return await this.bookdataservice.findOne(id);
